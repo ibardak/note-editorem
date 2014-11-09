@@ -1,0 +1,39 @@
+<div class="form">
+    <div data-ng-repeat="item in create.notes.paramList" class="form-group">
+        <div>
+            <label>{{::item.title}}</label>
+        </div>
+        <div data-ng-switch="::item.widget">
+            <input data-ng-switch-when="text"
+                   data-ng-model="create.notes.note[item.name]"
+                   type="text"
+                   class="form-control"/>
+            <textarea data-ng-switch-when="textarea"
+                      data-ng-model="create.notes.note[item.name]"
+                      ng-change="create.notes.findTagOnTyping(create.notes.note[item.name]);"
+                      class="form-control">
+            </textarea>
+            <div data-ng-switch-when="label">
+                <span class="badge">{{create.notes.note[item.name]}}</span> <!--data-ng-repeat="item in create.notes.Note[item.name]" -->
+            </div>
+            <button data-ng-switch-when="select"
+                    type="button"
+                    class="btn btn-default"
+                    data-ng-model="create.notes.note[item.name]"
+                    data-html="1"
+                    data-multiple="1"
+                    data-animation="am-flip-x"
+                    data-placeholder="Выберите теги..."
+                    data-max-length="7"
+                    data-max-length-html="выбрано"
+                    ng-options="item for item in create.notes.tagList"
+                    bs-select>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </div>
+    <button type="button" class="btn btn-default" data-ng-click="create.notes.clearNote();">Очистить</button>
+    <div class="pull-right">
+        <button type="submit" class="btn btn-success" data-ng-click="create.createNewNote();">Сохранить</button>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="form">
+    <div data-ng-repeat="item in edit.notes.paramList" class="form-group">
+        <div>
+            <label>{{::item.title}}</label>
+        </div>
+        <div data-ng-switch="::item.widget">
+            <input data-ng-switch-when="text"
+                   data-ng-model="edit.notes.note[item.name]"
+                   type="text"
+                   class="form-control"/>
+            <div data-ng-switch-when="textarea">
+                <div class="checkbox">
+                    <input type="checkbox" data-ng-model="edit.showBugVer">
+                    Показать вариант с багом
+                </div>
+                <div data-ng-show="!edit.showBugVer">
+                    <pre contenteditable
+                         ng-model="edit.notes.note[item.name]"
+                         ng-keyup="edit.keyPress($event)"
+                         style="min-height: 40px;">
+                    </pre>
+                <div>
+                    Предварительный просмотр
+                    <pre class="well well-md" ng-bind-html="edit.notes.note[item.name] | highlightTags: edit.notes.note.tag:true"></pre>
+                </div>
+                </div>
+                <div data-ng-show="edit.showBugVer">
+                    <pre class="well well-md"
+                         ng-model="edit.notes.note[item.name]"
+                         ng-keyup="edit.keyPress($event)"
+                         ng-bind-html="edit.notes.note[item.name] | highlightTags: edit.notes.note.tag:true"
+                         contenteditable>
+                    </pre>
+                </div>
+            </div>
+            <div data-ng-switch-when="label">
+                <span class="badge">{{edit.notes.note[item.name]}}</span>
+            </div>
+            <button data-ng-switch-when="select"
+                    type="button"
+                    class="btn btn-default"
+                    data-ng-model="edit.notes.note[item.name]"
+                    data-html="1"
+                    data-multiple="1"
+                    data-animation="am-flip-x"
+                    data-max-length="7"
+                    data-max-length-html="выбрано"
+                    data-placeholder="Выберите теги..."
+                    data-ng-options="item for item in edit.notes.tagList"
+                    bs-select>
+                <span class="caret"></span>
+            </button>
+        </div>
+    </div>
+    <button type="button" class="btn btn-danger" data-ng-click="edit.deleteNote();">Удалить</button>
+    <div class="pull-right">
+        <button type="submit" class="btn btn-success" data-ng-click="edit.updateNote();">Отредактировать</button>
+    </div>
+</div>

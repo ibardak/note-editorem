@@ -1,0 +1,51 @@
+@import "mixins";
+@import "variables";
+// ------------------------ TAGS
+html,body{
+  height:100%;
+  width: 100%;
+}
+body{
+  .gradient(@default-background-color,darken(@default-background-color,5%));
+}
+// ------------------------ CLASSES
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0.3% 0 0.3% 0;
+  width: 100%;
+  z-index: 100;
+  .setTextStyle(@font-size: 11px;);
+  .gradient(@footer-background-color);
+}
+// ------------------------ OVERRIDE Bootsrap
+.navbar{
+  border: 0px;
+}
+.navbar-default{
+  .gradient(greyscale(lighten(@header-background-color,50%)));
+}
+.navbar .navbar-brand, .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+  .setTextStyle(center, 20px, italic, @default-font-color);
+}
+.navbar .navbar-brand {
+  .gradient(@header-background-color);
+}
+.form{
+  width: 400px;
+}
+#tagSearchInput{
+  width: 300px;
+  display: inline-block;
+}
+.badge{
+  margin: 0 5px 0 5px;
+}
+
+// -------------
+.ng-table-header {
+  color: @default-font-color;
+  text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -5px 35px rgba(255,255,255,0.3);
+ .gradient(lighten(@header-background-color,10%));
+}

@@ -1,0 +1,27 @@
+<div>
+    <br>
+    <div class="input-group" style="width: 300px;">
+        <input type="text" class="form-control" data-ng-model="tags.tempTag" placeholder="Название нового тега">
+        <div class="input-group-btn">
+            <div class="btn-group">
+                <button class="btn btn-success" data-ng-click="tags.addTag();">Добавить</button>
+            </div>
+        </div>
+    </div>
+    <br>
+    <table class="table table-bordered table-condensed" style="width: auto;">
+        <tr data-ng-repeat="item in tags.notes.tagList">
+            <td>
+                <span class="badge">{{item}}</span>
+            </td>
+            <td>
+                <span class="fa fa-times fa-fw"
+                      style="cursor: pointer;color:red;"
+                      data-title="Удалить"
+                      data-placement="bottom"
+                      data-ng-click="tags.deleteTag($index)"
+                      bs-tooltip></span>
+            </td>
+        </tr>
+    </table>
+</div>

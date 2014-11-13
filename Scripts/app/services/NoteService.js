@@ -63,6 +63,7 @@
                     angular.copy(this.note, this.noteList[i]);
                 }
             }
+            this.findTagOnTyping(this.note.text + '.');
             NotificationService.success('Заметка отредактирована!');
         }
         catch (e){

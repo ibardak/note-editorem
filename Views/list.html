@@ -1,0 +1,37 @@
+<table ng-table="list.tableParams"
+       class="table table-bordered table-hover table-condensed"
+       data-template-pagination="list/pager.tpl.html">
+    <thead class="ng-table-header">
+    <tr>
+        <th data-ng-repeat="column in list.notes.paramList"
+            class="ng-table-header" data-ng-class="{
+                    'sortable' : column.sortable,
+                    'sort-asc':  list.tableParams.isSortBy(column.field, 'asc'),
+                    'sort-desc': list.tableParams.isSortBy(column.field, 'desc')
+                  }"
+            data-ng-click="list.tableParams_sort(column, list.tableParams)">
+            <div>{{column.title}}</div>
+        </th>
+        <td></td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-ng-repeat="query in $data | filter : {tag: index.tag_search}">
+        <td data-ng-repeat="column in list.notes.paramList" style="display: table-cell;vertical-align: middle;">
+            <span data-ng-switch="column.highlight">
+                <span  data-ng-switch-when="true"
+                       data-ng-bind-html="query[column.name] | highlightTags: index.notes.tagList:column.withHash">
+                </span>
+                <span  data-ng-switch-when="false">
+                    {{query[column.name]}}
+                </span>
+            </span>
+        </td>
+        <td>
+            <button type="button" class="btn btn-primary" data-ng-click="list.editNote(query);">
+                <span class="fa fa-edit fa-fw"></span>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>

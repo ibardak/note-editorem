@@ -1,53 +1,85 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <title>Note-editorem by Jeredian</title>
-  </head>
+<html data-ng-app="main">
+    <head lang="en">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>{{title}}</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+        <link  rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+        <link rel="stylesheet" href="Content/UI/ng-table.min.css">
+        <link rel="stylesheet" href="Content/style.css">
+    </head>
+    <body data-ng-controller="IndexCtrl as index">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#noteNavbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="navbar-brand">Заметки+</div>
+                </div>
+                <div class="collapse navbar-collapse" id="noteNavbar">
+                <div class="navbar-form navbar-left">
+                    <button class="btn btn-warning"
+                            type="button"
+                            data-title="Редактирование тегов"
+                            data-placement="bottom"
+                            data-ng-click="index.tagEdit();"
+                            bs-tooltip >
+                        <span class="fa fa-edit fa-fw"></span>
+                    </button>
+                    <button class="btn btn-success"
+                            data-title="Добавить заметку"
+                            data-placement="bottom"
+                            data-ng-click="index.createNew();"
+                            bs-tooltip>
+                        <span class="fa fa-plus fa-fw"></span>
+                    </button>
+                    <input id="tagSearchInput"
+                           type="text"
+                           class="form-control"
+                           data-ng-show="index.checkpage()"
+                           data-ng-model="index.tag_search"
+                           placeholder="Поиск по тэгу заметки...">
+                    <a class="btn btn-primary"
+                       data-ng-show="!index.checkpage()"
+                       href="#/">Вернуться к заметкам </a>
+                </div>
+                </div>
+            </div>
+        </nav>
+        <div class="container" data-ng-view></div>
+        <footer class="footer">Copyright &copy; , 2014. | Angular version: {{::version}}</footer>
 
-  <body>
-    <div id="container">
-      <div class="inner">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
-        <header>
-          <h1>Note-editorem</h1>
-          <h2>текстовый редактор заметок с тегами</h2>
-        </header>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-route.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-animate.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-sanitize.min.js"></script>
 
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/Jeredian/note-editorem/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/Jeredian/note-editorem/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          <a href="https://github.com/Jeredian/note-editorem" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/angular-strap/2.1.2/angular-strap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/angular-strap/2.1.2/angular-strap.tpl.min.js"></script>
+        <script src="Scripts/UI/ng-table.min.js"></script>
 
-        <hr>
-
-        <section id="main_content">
-          <h1>
-<a id="note-editorem" class="anchor" href="#note-editorem" aria-hidden="true"><span class="octicon octicon-link"></span></a>note-editorem</h1>
-
-<ul>
-<li>Project start at 06.11.2014 at 18 PM.<br>
-</li>
-<li>Project ended at 09.11.2014 at 20 PM.</li>
-</ul>
-        </section>
-
-        <footer>
-          Note-editorem is maintained by <a href="https://github.com/Jeredian">Jeredian</a><br>
-          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
-
-        
-      </div>
-    </div>
-  </body>
+        <script src="Scripts/app/app.js"></script>
+        <script src="Scripts/app/templates/app.tpl.js"></script>
+        <script src="Scripts/app/controllers/IndexCtrl.js"></script>
+        <script src="Scripts/app/controllers/CreateCtrl.js"></script>
+        <script src="Scripts/app/controllers/EditCtrl.js"></script>
+        <script src="Scripts/app/controllers/ListCtrl.js"></script>
+        <script src="Scripts/app/controllers/TagsCtrl.js"></script>
+        <script src="Scripts/app/services/NotificationService.js"></script>
+        <script src="Scripts/app/services/NoteService.js"></script>
+        <script src="Scripts/app/filters/HighlightTags.js"></script>
+        <script src="Scripts/app/directives/ContentEditable.js"></script>
+    </body>
 </html>

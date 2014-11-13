@@ -1,0 +1,17 @@
+// ------------------------ MIXINS
+.gradient(@startColor, @endColor: darken(@startColor,10%))
+{
+  background-color: @startColor;
+  background-repeat: repeat-x;
+  background-image: svg-gradient(to bottom, @startColor,  @endColor);
+}
+.setTextStyle( @text-align  : center,
+               @font-size   : @default-font-size,
+               @font-style  : normal,
+               @color       : @default-font-color)
+{
+  text-align: @text-align;
+  font-size:  @font-size;
+  font-style: @font-style;
+  color:      @color;
+}
